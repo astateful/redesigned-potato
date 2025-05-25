@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import Flag from '../flag';
 import { SortingType } from '../../../types/medals';
 import sort from '../../../lib/sort';
 import { useMedals } from '../../hooks';
@@ -40,7 +41,7 @@ const Table = () => {
   );
 
   return (
-    <table>
+    <table style={{ width: '500px' }}>
       <thead>
         <tr>
           <th>Country</th>
@@ -51,9 +52,11 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {sortedMedals.map((medal) => (
+        {sortedMedals.map((medal, i) => (
           <tr key={medal.code}>
-            <td>{medal.code}</td>
+            <td className="flex flex-row">
+              {i} <Flag code={medal.code} /> {medal.code}
+            </td>
             <td>{medal.gold}</td>
             <td>{medal.silver}</td>
             <td>{medal.bronze}</td>
