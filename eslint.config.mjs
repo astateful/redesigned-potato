@@ -75,6 +75,8 @@ const config = [
           sortDir: 'asc',
         },
       ],
+
+      'no-unused-vars': 'off',
     },
   },
 ];

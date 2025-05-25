@@ -1,6 +1,6 @@
 'use client';
 
-import { MedalEntry } from '../types/medals';
+import { MedalEntry } from '../../types/medals';
 
 import { useCallback, useReducer } from 'react';
 
