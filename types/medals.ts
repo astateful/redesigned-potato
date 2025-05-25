@@ -3,6 +3,7 @@ export type MedalEntry = {
   gold: number;
   silver: number;
   bronze: number;
+  total: number;
 };
 
 export enum SortingType {
@@ -11,3 +12,10 @@ export enum SortingType {
   Bronze = 'bronze',
   Total = 'total',
 }
+
+export type TotallessMedalEntry = {
+  code: string;
+  gold: number;
+  silver: number;
+  bronze: number;
+};

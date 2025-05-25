@@ -1,5 +1,9 @@
 import medals from '../../../../data/medals.json';
 
+import withTotal from '../../../../lib/total';
+
 export function GET() {
-  return Response.json({ result: medals });
+  const result = withTotal(medals);
+
+  return Response.json({ result });
 }

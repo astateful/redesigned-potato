@@ -46,12 +46,9 @@ const makeSorter = (sortingType: SortingType) => {
 
     case SortingType.Total: {
       return (a: MedalEntry, b: MedalEntry) => {
-        const totalA = a.gold + a.silver + a.bronze;
-        const totalB = b.gold + b.silver + b.bronze;
-
-        if (totalA > totalB) return -1;
-        if (totalB < totalA) return 1;
-        if (totalB === totalA) {
+        if (a.total > b.total) return -1;
+        if (a.total < b.total) return 1;
+        if (a.total === b.total) {
           if (a.gold < b.gold) 1;
           if (a.gold > b.gold) return -1;
           return 0;

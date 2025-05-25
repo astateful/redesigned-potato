@@ -57,6 +57,7 @@ const Table = () => {
             <td>{medal.gold}</td>
             <td>{medal.silver}</td>
             <td>{medal.bronze}</td>
+            <td>{medal.total}</td>
           </tr>
         ))}
       </tbody>
