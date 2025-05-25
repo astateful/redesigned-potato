@@ -29,3 +29,5 @@
 9. Not sufficient memoization of data returned from hook, as there is a new reference created on every render.
 10. The medal counts and sorting could have been generalized much further. Ideally gold/silver/bronze can be generalized to a vector with traits such as "sortable" etc, then in the frontend these traits could be applied as transformations to the returned medal count vectors and it would be result in way less code being written, both in sorting function as well as in frontend. I usually take this approach when working with statistical data.
 11. The index is 0-based rather than 1-based in the medal count table.
+12. For full client solution, a proper loading indicator to indicate data is being loaded in the table
+13. For a more server driven approach, a partial table rendering containing all the countries but with 0 in place for the medal counts can be achieved by rendering the empty table first on the server by sending the countries list to the reducer. I have actually used this pattern in the past.
