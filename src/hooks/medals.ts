@@ -26,7 +26,7 @@ const reducer = (state: MedalState, action: MedalAction) => {
     case MedalActionKind.MedalsFetched: {
       return {
         ...state,
-        data: [...state.data, ...action.data],
+        data: [...action.data],
         count: action.count,
       };
     }
@@ -44,11 +44,9 @@ const useMedals = () => {
       const response = await fetch('/api/medals');
       const { result } = await response.json();
 
-      dispatch({
-        type: MedalActionKind.MedalsFetched,
-        data: result,
-        count: result.length,
-      });
+      const count = result.length;
+
+      dispatch({ type: MedalActionKind.MedalsFetched, data: result, count });
     } catch (err: any) {
       alert(err.message);
     }
