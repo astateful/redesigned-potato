@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import Flag from '../flag';
 import { SortingType } from '../../../types/medals';
-import sort from '../../../lib/sort';
 import { useMedals } from '../../hooks';
 
 const Table = () => {
@@ -23,8 +22,8 @@ const Table = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    getMedals();
-  }, [getMedals]);
+    getMedals(sortingType);
+  }, [getMedals, sortingType]);
 
   const updateSorting = useCallback(
     (sortingType: SortingType) => {
@@ -33,11 +32,6 @@ const Table = () => {
       router.push(`?${sp.toString()}`);
     },
     [router]
-  );
-
-  const sortedMedals = useMemo(
-    () => sort(medals, sortingType),
-    [medals, sortingType]
   );
 
   return (
@@ -52,7 +46,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {sortedMedals.map((medal, i) => (
+        {medals.map((medal, i) => (
           <tr key={medal.code}>
             <td className="flex flex-row">
               {i} <Flag code={medal.code} /> {medal.code}

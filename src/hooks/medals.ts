@@ -1,8 +1,9 @@
 'use client';
 
-import { MedalEntry } from '../../types/medals';
-
 import { useCallback, useReducer } from 'react';
+
+import { MedalEntry, SortingType } from '../../types/medals';
+import sort from '../../lib/sort';
 
 type MedalState = {
   data: Array<MedalEntry>;
@@ -39,14 +40,15 @@ const reducer = (state: MedalState, action: MedalAction) => {
 const useMedals = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const getMedals = useCallback(async () => {
+  const getMedals = useCallback(async (sortingType: SortingType) => {
     try {
       const response = await fetch('/api/medals');
       const { result } = await response.json();
 
       const count = result.length;
+      const data = sort(result, sortingType);
 
-      dispatch({ type: MedalActionKind.MedalsFetched, data: result, count });
+      dispatch({ type: MedalActionKind.MedalsFetched, data, count });
     } catch (err: any) {
       alert(err.message);
     }
