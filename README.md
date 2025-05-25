@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Overview
 
-## Getting Started
+1. I opted to have the root of the repo "be" the entire NextJS project in terms of time constraints, however practically speaking it is better to separate concerns by using packages or workspaces and having a monorepo tool such as Lerna to manage the inter-dependencies. This is the approach I usually have taken in past projects. Here the minimum separation is __tests__ for tests, lib for library code, as well as "src" for the NextJS app.
 
-First, run the development server:
+2. I thought the requirement to sort on the client side only was strange; normally sorting is something that happens on the server-side, especially for large result lists.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3. I opted for TDD when creating the sorting function. If we are in MVP mode, I thought it most critical to ensure that the basic functionality is working before working on the styling. This took some extra time to setup but I felt the trade-off was worth it, since testing the sorting via the UI would have taken much longer. And in general testing library functionality via UI is to be avoided.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. In order to separate component presentation from data, I opted for a separate hook to manage the data and make the API calls. It would have been natural to move the sorting into this hook also, or make it part of the API call to achieve even better separation.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. I opted to compute the totals on the server side to save computation logic on the frontend as well as to simplify the sorting logic. Ideally the totals should be integrated with the data itself but I opted not to touch the reference data. This also necessitated using two separate types for managing a medal entry with the total and one without, in order to properly type transformations.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+6. I always spend extra time when setting up linting and prettier since I do not do it so often...
 
-## Learn More
+7. Technically wise, I usually opt to use pnpm to manage dependencies.
 
-To learn more about Next.js, take a look at the following resources:
+# Bugs/Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Flag component does not handle unsupported/unknown flag
+2. sorting should have been done for ASC as well as DESC (so clicking the same field multiple times would change the direction of the sort)
+3. table is not responsive so displays incorrectly on mobile devices
+4. caching not implemented for the API call via nextjs static parameters definition
+5. no pointer icon for hovering over sortable columns
+6. no component testing
+7. Table not properly designed in terms of spacing/in accordance with specification
+8. Flag component does not use tailwind, opts instead for ineffcient css-in-jsx solution.
+9. Not sufficient memoization of data returned from hook, as there is a new reference created on every render.
+10. The medal counts and sorting could have been generalized much further. Ideally gold/silver/bronze can be generalized to a vector with traits such as "sortable" etc, then in the frontend these traits could be applied as transformations to the returned medal count vectors and it would be result in way less code being written, both in sorting function as well as in frontend.
