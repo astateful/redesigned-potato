@@ -1,55 +1,65 @@
 import { MedalEntry, SortingType } from '../types/medals';
 
 const makeSorter = (sortingType: SortingType) => {
-  if (sortingType === SortingType.Gold) {
-    return (a: MedalEntry, b: MedalEntry) => {
-      if (a.gold > b.gold) return -1;
-      if (a.gold < b.gold) return 1;
-      if (a.gold === b.gold) {
-        if (a.silver < b.silver) 1;
+  switch (sortingType) {
+    case SortingType.Gold: {
+      return (a: MedalEntry, b: MedalEntry) => {
+        if (a.gold > b.gold) return -1;
+        if (a.gold < b.gold) return 1;
+        if (a.gold === b.gold) {
+          if (a.silver < b.silver) 1;
+          if (a.silver > b.silver) return -1;
+          return 0;
+        }
+
+        return 0;
+      };
+    }
+
+    case SortingType.Silver: {
+      return (a: MedalEntry, b: MedalEntry) => {
         if (a.silver > b.silver) return -1;
-        return 0;
-      }
-    };
-  }
+        if (a.silver < b.silver) return 1;
+        if (a.silver === b.silver) {
+          if (a.gold < b.gold) 1;
+          if (a.gold > b.gold) return -1;
+          return 0;
+        }
 
-  if (sortingType === SortingType.Silver) {
-    return (a: MedalEntry, b: MedalEntry) => {
-      if (a.silver > b.silver) return -1;
-      if (a.silver < b.silver) return 1;
-      if (a.silver === b.silver) {
-        if (a.gold < b.gold) 1;
-        if (a.gold > b.gold) return -1;
         return 0;
-      }
-    };
-  }
+      };
+    }
 
-  if (sortingType === SortingType.Bronze) {
-    return (a: MedalEntry, b: MedalEntry) => {
-      if (a.bronze > b.bronze) return -1;
-      if (a.bronze < b.bronze) return 1;
-      if (a.bronze === b.bronze) {
-        if (a.gold < b.gold) 1;
-        if (a.gold > b.gold) return -1;
+    case SortingType.Bronze: {
+      return (a: MedalEntry, b: MedalEntry) => {
+        if (a.bronze > b.bronze) return -1;
+        if (a.bronze < b.bronze) return 1;
+        if (a.bronze === b.bronze) {
+          if (a.gold < b.gold) 1;
+          if (a.gold > b.gold) return -1;
+          return 0;
+        }
+
         return 0;
-      }
-    };
-  }
+      };
+    }
 
-  if (sortingType === SortingType.Total) {
-    return (a: MedalEntry, b: MedalEntry) => {
-      const totalA = a.gold + a.silver + a.bronze;
-      const totalB = b.gold + b.silver + b.bronze;
+    case SortingType.Total: {
+      return (a: MedalEntry, b: MedalEntry) => {
+        const totalA = a.gold + a.silver + a.bronze;
+        const totalB = b.gold + b.silver + b.bronze;
 
-      if (totalA > totalB) return -1;
-      if (totalB < totalA) return 1;
-      if (totalB === totalA) {
-        if (a.gold < b.gold) 1;
-        if (a.gold > b.gold) return -1;
+        if (totalA > totalB) return -1;
+        if (totalB < totalA) return 1;
+        if (totalB === totalA) {
+          if (a.gold < b.gold) 1;
+          if (a.gold > b.gold) return -1;
+          return 0;
+        }
+
         return 0;
-      }
-    };
+      };
+    }
   }
 };
 
