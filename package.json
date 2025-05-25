@@ -1,0 +1,35 @@
+{
+  "name": "medal-count",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-n": "17.17.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "5.2.6",
+    "eslint-plugin-promise": "7.2.1",
+    "eslint-plugin-sort-exports": "0.9.1",
+    "prettier": "3.5.3",
+    "tailwindcss": "^4"
+  },
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+}

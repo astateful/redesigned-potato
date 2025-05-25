@@ -1,0 +1,9 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "git.autorefresh": true,
+  "git.autofetch": true
+}
